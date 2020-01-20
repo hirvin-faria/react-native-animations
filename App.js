@@ -35,7 +35,7 @@ export default class App extends Component {
     fontSize: 20,
   }
 
-  
+
 
   render() {
     return (
@@ -65,11 +65,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
   },
   crescentButton:{
     backgroundColor: '#29a38f',
