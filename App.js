@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import React, { Component, useState, useEffect } from 'react';
+import { Platform, StyleSheet, Text, View, TouchableOpacity, Animated } from 'react-native';
 import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
+import { Easing } from 'react-native-reanimated';
 
 
 //Declaração de animações
@@ -29,6 +30,34 @@ const zoomOut = {
   },
 };
 
+const FadeInView = (props) => {
+  const [fadeAnim] = useState(new Animated.Value(0))  // Initial value for opacity: 0
+
+  //Chamada da animação
+  React.useEffect(() => {
+    Animated.timing(
+      fadeAnim,
+      {
+        toValue: 1,
+        duration: 5000,
+        delay: 3,
+      }
+    ).start();
+  }, [])
+
+  //Retorno do componente animado
+  return (
+    <Animated.View                 // Special animatable View
+      style={{
+        ...props.style,
+        opacity: fadeAnim,         // A propriedade opacity ira ser alterada para 1 pela animação.
+      }}
+    >
+      {props.children}
+    </Animated.View>
+  );
+}
+
 export default class App extends Component {
   
   state = {
@@ -54,6 +83,13 @@ export default class App extends Component {
 
         <Animatable.Text animation={fadeIn} duration={5000} >Fade me in</Animatable.Text>
         <Animatable.Text animation={zoomOut} duration={5000} >Zoom me out</Animatable.Text>
+
+        <View style={{alignItems: 'center', justifyContent: 'center'}}>
+          <FadeInView style={{width: 250, height: 50, backgroundColor: 'powderblue'}}>
+            <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>Fading in</Text>
+          </FadeInView>
+        </View>
+
       </View>
     );
   }
