@@ -51,6 +51,12 @@ const FadeInView = (props) => {
       style={{
         ...props.style,
         opacity: fadeAnim,         // A propriedade opacity ira ser alterada para 1 pela animação.
+        transform: [{
+          translateY: fadeAnim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [300, 0]  // 0 : 150, 0.5 : 75, 1 : 0
+          }),
+        }],
       }}
     >
       {props.children}
